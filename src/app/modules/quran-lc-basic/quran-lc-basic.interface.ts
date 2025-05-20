@@ -1,6 +1,5 @@
 export type TQuranLCBasic = {
   userName: string;
-  userEmail: string;
   userGender: 'male' | 'female';
   dateOfBirth: string;
   profession: string;

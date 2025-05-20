@@ -3,7 +3,6 @@ import { z } from 'zod';
 const createQuranLCBasicValidationSchema = z.object({
   body: z.object({
     userName: z.string().min(2, 'Name must be at least 2 characters long'),
-    userEmail: z.string().email('Invalid email format'),
     userGender: z.enum(['male', 'female']),
     dateOfBirth: z.string(),
     profession: z.string(),
@@ -24,7 +23,6 @@ const updateQuranLCBasicValidationSchema = z.object({
       .string()
       .min(2, 'Name must be at least 2 characters long')
       .optional(),
-    userEmail: z.string().email('Invalid email format').optional(),
     userGender: z.enum(['male', 'female']).optional(),
     dateOfBirth: z.string().optional(),
     profession: z.string().optional(),

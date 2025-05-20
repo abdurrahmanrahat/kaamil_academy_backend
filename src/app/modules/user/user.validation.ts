@@ -4,7 +4,6 @@ const createUserValidationSchema = z.object({
   body: z.object({
     name: z.string(),
     email: z.string().email(),
-    phone: z.string(),
     password: z.string(),
   }),
 });
@@ -24,9 +23,7 @@ const userDetailsSchema = z.object({
 const updateUserValidationSchema = z.object({
   body: z.object({
     name: z.string().optional(),
-    phone: z.string().optional(),
     role: z.enum(['user', 'admin']).optional(),
-    isRequestPending: z.boolean().optional(),
     details: userDetailsSchema.optional(),
   }),
 });

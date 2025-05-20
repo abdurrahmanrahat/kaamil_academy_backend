@@ -8,10 +8,6 @@ const QuranLCBasicSchema = new Schema<TQuranLCBasic>(
       required: [true, 'User name is required'],
       minlength: [2, 'User name must be at least 2 characters'],
     },
-    userEmail: {
-      type: String,
-      required: [true, 'Email is required'],
-    },
     userGender: {
       type: String,
       enum: {
