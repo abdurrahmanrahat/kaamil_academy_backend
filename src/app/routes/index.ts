@@ -1,5 +1,6 @@
 import express from 'express';
 import { AuthRoutes } from '../modules/auth/auth.route';
+import { BkashRoutes } from '../modules/bkash/bkash.route';
 import { BlogRoutes } from '../modules/blog/blog.route';
 import { QuranLCBasicRoutes } from '../modules/quran-lc-basic/quran-lc-basic.route';
 import { UserRoutes } from '../modules/user/user.route';
@@ -24,6 +25,10 @@ const moduleRoutes = [
   {
     path: '/quran-lc-basic-students',
     route: QuranLCBasicRoutes,
+  },
+  {
+    path: '/bkash',
+    route: BkashRoutes,
   },
 ];
 

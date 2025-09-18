@@ -14,4 +14,11 @@ export default {
   jwt_refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
   google_oauth_client_id: process.env.GOOGLE_OAUTH_CLIENT_ID,
   google_oauth_client_secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+  frontend_live_url: process.env.FRONTEND_LIVE_URL,
+  backed_live_url: process.env.BACKED_LIVE_URL,
+  bkash_checkout_base_url: process.env.BKASH_CHECKOUT_BASE_URL,
+  bkash_checkout_username: process.env.BKASH_CHECKOUT_USERNAME,
+  bkash_checkout_password: process.env.BKASH_CHECKOUT_PASSWORD,
+  bkash_checkout_app_key: process.env.BKASH_CHECKOUT_APP_KEY,
+  bkash_checkout_app_secret: process.env.BKASH_CHECKOUT_APP_SECRET,
 };
