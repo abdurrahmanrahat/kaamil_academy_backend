@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
 import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../../errors/AppError';
-import { userSearchableFields } from './user.constants';
+import { userSearchableFields } from './user.constant';
 import { TUser } from './user.interface';
 import { User } from './user.model';
 

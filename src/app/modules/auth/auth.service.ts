@@ -4,8 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import config from '../../config';
 import AppError from '../../errors/AppError';
 import { User } from '../user/user.model';
-import { TLoginUser } from './auth.interface';
-import { createJwtToken, googleClient } from './auth.utils';
+import { TDecodedUser, TLoginUser } from './auth.interface';
+import { createJwtToken, googleClient, verifyJwtToken } from './auth.utils';
 
 // post
 const loginUserIntoDb = async (payload: TLoginUser) => {
@@ -43,6 +43,39 @@ const loginUserIntoDb = async (payload: TLoginUser) => {
   );
 
   return { accessToken, refreshToken };
+};
+
+const refreshToken = async (refreshToken: string) => {
+  // check if refresh token valid
+  const decoded = verifyJwtToken(
+    refreshToken,
+    config.jwt_refresh_secret as string,
+  ) as TDecodedUser;
+
+  if (!decoded) {
+    throw new Error('Invalid refresh token');
+  }
+
+  // check if user exists
+  const existingUser = await User.isUserExistsByEmail(decoded.email);
+  if (!existingUser) {
+    throw new AppError(httpStatus.NOT_FOUND, 'User not found!');
+  }
+
+  // Generate JWT token
+  const jwtPayload = {
+    name: existingUser.name,
+    email: existingUser?.email,
+    role: existingUser.role,
+  };
+
+  const accessToken = createJwtToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    config.jwt_access_expires_in as string,
+  );
+
+  return accessToken;
 };
 
 const googleLoginIntoDb = async (code: string) => {
@@ -100,5 +133,6 @@ const googleLoginIntoDb = async (code: string) => {
 
 export const AuthServices = {
   loginUserIntoDb,
+  refreshToken,
   googleLoginIntoDb,
 };

@@ -12,6 +12,10 @@ export const createJwtToken = (
   });
 };
 
+export const verifyJwtToken = (token: string, secret: string) => {
+  return jwt.verify(token, secret);
+};
+
 export const googleClient = () => {
   const GOOGLE_CLIENT_ID = config.google_oauth_client_id;
   const GOOGLE_CLIENT_SECRET = config.google_oauth_client_secret;
