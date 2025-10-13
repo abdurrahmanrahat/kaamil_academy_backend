@@ -3,18 +3,18 @@ import { TBlog } from './blog.interface';
 
 const BlogSchema = new Schema<TBlog>(
   {
-    blogTitle: {
+    title: {
       type: String,
       required: [true, 'Blog title is required'],
       minlength: 1,
     },
-    blogImage: { type: String, required: [true, 'Blog image is required'] },
-    blogDescription: {
+    image: { type: String, required: [true, 'Blog image is required'] },
+    description: {
       type: String,
       required: [true, 'Blog description is required'],
       minlength: 1,
     },
-    blogTags: {
+    tags: {
       type: [String],
       required: [true, 'Blog tag is required'],
       validate: [

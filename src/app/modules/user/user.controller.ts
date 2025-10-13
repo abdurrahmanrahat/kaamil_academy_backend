@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
+import AppError from '../../errors/AppError';
 import catchAsync from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
 import { UserServices } from './user.service';
@@ -52,6 +53,23 @@ const getCurrentUserByEmail = catchAsync(
   },
 );
 
+const getMe = catchAsync(async (req: Request, res: Response) => {
+  const accessToken = req.headers.authorization?.split(' ')[1];
+
+  if (!accessToken) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Token not found!');
+  }
+
+  const result = await UserServices.getLoggedInUserFromDB(accessToken);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User found successfully',
+    data: { user: result },
+  });
+});
+
 const updateUser = catchAsync(async (req: Request, res: Response) => {
   const { userId } = req.params;
 
@@ -82,6 +100,7 @@ export const UserControllers = {
   createUser,
   getAllUsers,
   getCurrentUserByEmail,
+  getMe,
   updateUser,
   deleteUser,
 };

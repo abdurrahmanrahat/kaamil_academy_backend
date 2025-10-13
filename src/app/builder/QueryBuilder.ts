@@ -55,6 +55,13 @@ class QueryBuilder<T> {
       }
     });
 
+    // tags filtering
+    if (this.query?.tags) {
+      const tagsArray = (this.query.tags as string).split(',');
+
+      queryObj.tags = { $in: tagsArray };
+    }
+
     this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>);
 
     return this;
