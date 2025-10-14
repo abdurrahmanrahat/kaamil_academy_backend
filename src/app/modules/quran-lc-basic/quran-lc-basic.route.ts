@@ -23,4 +23,8 @@ router.delete('/:studentId', QuranLCBasicControllers.deleteQuranLCBasic);
 
 // router.get('/download-pdf', QuranLCBasicControllers.makePDFQuranLCBasic);
 
+// payment api
+router.post('/payment', QuranLCBasicControllers.createQuranLCBasicPayment);
+router.get('/payment/callback', QuranLCBasicControllers.quranLCBasicCallback);
+
 export const QuranLCBasicRoutes = router;

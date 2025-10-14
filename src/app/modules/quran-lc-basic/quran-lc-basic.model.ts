@@ -41,21 +41,17 @@ const QuranLCBasicSchema = new Schema<TQuranLCBasic>(
       type: String,
       required: [true, 'Batch is required'],
     },
-    paymentMethod: {
-      type: String,
-      required: [true, 'Payment method is required'],
-    },
-    RegFeeNumber: {
-      type: String,
-      required: [true, 'Registration fee number is required'],
-    },
     status: {
       type: String,
       enum: {
-        values: ['default', 'completed', 'waiting'],
-        message: 'Status must be either default, completed, or waiting',
+        values: ['completed', 'pending'],
+        message: 'Status must be either completed, or pending',
       },
-      default: 'default',
+      default: 'pending',
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
     },
   },
   {

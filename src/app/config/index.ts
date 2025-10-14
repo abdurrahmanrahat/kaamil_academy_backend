@@ -14,6 +14,7 @@ export default {
   jwt_refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
   google_oauth_client_id: process.env.GOOGLE_OAUTH_CLIENT_ID,
   google_oauth_client_secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+  bulk_sms_api_key: process.env.BULK_SMS_API_KEY,
   frontend_live_url: process.env.FRONTEND_LIVE_URL,
   backed_live_url: process.env.BACKED_LIVE_URL,
   bkash_checkout_base_url: process.env.BKASH_CHECKOUT_BASE_URL,

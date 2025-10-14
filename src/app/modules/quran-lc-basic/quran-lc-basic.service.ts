@@ -1,4 +1,5 @@
 import QueryBuilder from '../../builder/QueryBuilder';
+import { sendMessageToUserNumber } from '../../utils/sendMessageToUserNumber';
 import { quranLCBasicSearchableFields } from './quran-lc-basic.constants';
 import { TQuranLCBasic } from './quran-lc-basic.interface';
 import { QuranLCBasic } from './quran-lc-basic.model';
@@ -11,14 +12,18 @@ const createQuranLCBasicIntoDb = async (userInfo: TQuranLCBasic) => {
 
 // get
 const getQuranLCBasicsFromDb = async (query: Record<string, unknown>) => {
-  const QuranLCBasicQuery = new QueryBuilder(QuranLCBasic.find(), query)
+  const QuranLCBasicQuery = new QueryBuilder(
+    QuranLCBasic.find({ isDeleted: false }),
+    query,
+  )
     .search(quranLCBasicSearchableFields)
-    .filter();
+    .filter()
+    .pagination();
 
   const data = await QuranLCBasicQuery.modelQuery;
 
   const quranLCBasicQueryWithoutPagination = new QueryBuilder(
-    QuranLCBasic.find(),
+    QuranLCBasic.find({ isDeleted: false }),
     query,
   )
     .search(quranLCBasicSearchableFields)
@@ -38,12 +43,32 @@ const updateQuranLCBasicsIntoDb = async (
     new: true,
   });
 
+  if (result && body.status === 'completed') {
+    // send message
+    const message = `অভিনন্দন! 🎉
+আপনার কুরআন কোর্সে রেজিস্ট্রেশন সম্পন্ন হয়েছে।
+হোয়াটসঅ্যাপ গ্রুপে যোগ দিন 👉 ${
+      result.userGender === 'male'
+        ? 'https://url-shortener.me/71QE'
+        : 'https://url-shortener.me/71PZ'
+    }`;
+
+    await sendMessageToUserNumber({
+      phone: result.phoneNumber,
+      message,
+    });
+  }
+
   return result;
 };
 
 // delete
 const deleteQuranLCBasicIntoDb = async (studentId: string) => {
-  const result = await QuranLCBasic.findByIdAndDelete({ _id: studentId });
+  const result = await QuranLCBasic.findByIdAndUpdate(
+    studentId,
+    { isDeleted: true },
+    { new: true },
+  );
   return result;
 };
 

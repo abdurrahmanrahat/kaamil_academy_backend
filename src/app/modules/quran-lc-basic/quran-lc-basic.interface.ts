@@ -6,8 +6,7 @@ export type TQuranLCBasic = {
   address: string;
   phoneNumber: string;
   whatsAppNumber: string;
-  batch: string; // batch-01
-  paymentMethod: string; // BKASH || NOGOD
-  RegFeeNumber: string; //
-  status: 'default' | 'completed' | 'waiting';
+  batch: string;
+  status: 'pending' | 'completed';
+  isDeleted?: boolean;
 };
