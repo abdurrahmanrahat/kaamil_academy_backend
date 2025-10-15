@@ -49,8 +49,8 @@ const updateQuranLCBasicsIntoDb = async (
 আপনার কুরআন কোর্সে রেজিস্ট্রেশন সম্পন্ন হয়েছে।
 হোয়াটসঅ্যাপ গ্রুপে যোগ দিন 👉 ${
       result.userGender === 'male'
-        ? 'https://url-shortener.me/71QE'
-        : 'https://url-shortener.me/71PZ'
+        ? 'https://chat.whatsapp.com/LTObJmj2frw9C5rkgqRwbP'
+        : 'https://chat.whatsapp.com/DDu0ZumSLML0vVmsDApAxy'
     }`;
 
     await sendMessageToUserNumber({
