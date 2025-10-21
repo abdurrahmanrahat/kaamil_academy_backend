@@ -12,6 +12,8 @@ const createQuranLCBasicValidationSchema = z.object({
       .string()
       .min(11, 'WhatsApp number must be at least 11 digits'),
     batch: z.string().min(1, 'Batch is required'),
+    paymentMethod: z.string().min(1, 'Payment method is required'),
+    RegFeeNumber: z.string().min(1, 'Registration fee number is required'),
   }),
 });
 
@@ -35,6 +37,11 @@ const updateQuranLCBasicValidationSchema = z.object({
       .optional(),
     batch: z.string().optional(),
     status: z.enum(['pending', 'completed']).optional(),
+    paymentMethod: z.string().min(1, 'Payment method is required').optional(),
+    RegFeeNumber: z
+      .string()
+      .min(1, 'Registration fee number is required')
+      .optional(),
   }),
 });
 

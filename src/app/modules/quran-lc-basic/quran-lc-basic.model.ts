@@ -41,6 +41,14 @@ const QuranLCBasicSchema = new Schema<TQuranLCBasic>(
       type: String,
       required: [true, 'Batch is required'],
     },
+    paymentMethod: {
+      type: String,
+      required: [true, 'Payment method is required'],
+    },
+    RegFeeNumber: {
+      type: String,
+      required: [true, 'Registration fee number is required'],
+    },
     status: {
       type: String,
       enum: {
